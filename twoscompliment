@@ -1,0 +1,53 @@
+def add_binary_nums(x,y):
+    max_len = max(len(x), len(y))
+
+    x = x.zfill(max_len)
+    y = y.zfill(max_len)
+
+    result = ''
+    carry = 0
+
+    for i in range(max_len-1, -1, -1):
+        r = carry
+        r += 1 if x[i] == '1' else 0
+        r += 1 if y[i] == '1' else 0
+        result = ('1' if r % 2 == 1 else '0') + result
+        carry = 0 if r < 2 else 1       
+
+    if carry !=0 : result = '1' + result
+
+    return result.zfill(max_len)
+    
+def twoscomp(num):
+    a=''
+    b=''
+    
+    for c in num:
+        if (c == '1'):
+            a = a + '0'
+        if (c == '0'):
+            a = a + '1'
+    b=add_binary_nums(a,'1')
+    i=1
+    res=''
+    myMaxLen=len(num)
+    if (len(b) > myMaxLen):
+        k = b[::-1]
+    else:
+        k=b
+    for c in k:
+        res = res + c
+        if (i==myMaxLen):
+            break
+        i=i+1
+        
+    return (res)
+    
+#You do not need to make changes below this line.
+if __name__=="__main__":
+    print ("Welcome to Two's Complement Creator")
+    num = input("Enter a Binary Value:\n")
+    num1 = twoscomp(num)
+    print ("In Two's Complement:\n" + num1)
+    
+    
